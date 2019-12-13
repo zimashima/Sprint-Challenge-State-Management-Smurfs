@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export const GET_SMURFS_START = 'GET_SMURFS_START'
 export const GET_SMURFS_SUCCESS = 'GET_SMURFS_SUCCESS'
 export const GET_SMURFS_FAIL = 'GET_SMURFS_FAIL'
@@ -13,3 +15,28 @@ export const UPDATE_SMURFS_FAIL = 'UPDATE_SMURFS_FAIL'
 export const DELETE_SMURFS_START = 'DELETE_SMURFS_START'
 export const DELETE_SMURFS_SUCCESS = 'DELETE_SMURFS_SUCCESS'
 export const DELETEE_SMURFS_FAIL = 'DELETE_SMURFS_FAIL'
+
+
+export const getSmurfs = () => dispatch => {
+    dispatch({type: GET_SMURFS_START})
+    axios
+        .get('http://localhost:3333/smurfs')
+        .then(res => {
+            dispatch({type: GET_SMURFS_SUCCESS, payload: res.data})
+        })
+        .catch(err =>{
+            dispatch({type: GET_SMURFS_FAIL, payload: err})
+        })
+}
+
+export const createSmurfs = (smurfValue) => dispatch => {
+    dispatch({type: CREATE_SMURFS_START})
+    axios
+        .post('http://localhost:3333/smurfs', smurfValue)
+        .then(res => {
+            dispatch({type: CREATE_SMURFS_SUCCESS, payload: res.data})
+        })
+        .catch(err =>{
+            dispatch({type: CREATE_SMURFS_FAIL, payload: err})
+        })
+}
