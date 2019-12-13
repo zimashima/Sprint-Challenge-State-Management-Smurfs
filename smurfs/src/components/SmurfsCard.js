@@ -42,6 +42,6 @@ const SmurfsCard = props => {
 
 export default connect(
     null,
-    {}
+    {deleteSmurf}
 )(SmurfsCard)
   
